@@ -6,10 +6,6 @@ class GithubCITools:
     def __init__(self):
         pass
 
-    def some_task(self, arg1="a1", arg2="a2"):
-        print(f"some task {arg1} {arg2}")
-        return f"some task result  {arg1} {arg2}"
-
     def release_diff(self, master_branch="master"):
         repo = GitChangesLog()
         github_api = GithubApi()
