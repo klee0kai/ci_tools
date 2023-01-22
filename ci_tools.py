@@ -1,6 +1,8 @@
 #!/bin/python3
 
 import argparse
+import logging
+
 
 from gh_helpers.GithubConfigs import GithubConfigs
 from github_ci_tools import GithubCITools
@@ -10,9 +12,10 @@ if __name__ == '__main__':
     tools = GithubCITools()
 
     parser = argparse.ArgumentParser(add_help=True, description="ci_tools - CI Tools")
-    parser.add_argument("-f", type=str, default=None, help="Result to file")
+    parser.add_argument("-w", type=str, default=None, help="Result write to file")
     parser.add_argument("--summary", action='store_true', help="Same result as github report summary")
     parser.add_argument("-l", action='store_true', help="Log result to console")
+    parser.add_argument("-d", action='store_true', help="Debug log")
 
     subparsers = parser.add_subparsers(help='sub-command help')
 
@@ -27,6 +30,9 @@ if __name__ == '__main__':
         pass
 
     args = parser.parse_args()
+
+    if args.d:
+        logging.basicConfig(level=logging.DEBUG)
 
     if not 'func' in args or args.func is None:
         parser.print_help()
@@ -43,8 +49,8 @@ if __name__ == '__main__':
     if args.l:
         print(result)
 
-    if not args.f is None:
-        with(open(args.f, "w")) as f:
+    if not args.w is None:
+        with(open(args.w, "w")) as f:
             f.write(result)
 
     if args.summary:

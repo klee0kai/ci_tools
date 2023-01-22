@@ -6,7 +6,7 @@ class GithubCITools:
     def __init__(self):
         pass
 
-    def release_diff(self, master_branch="master"):
+    def release_diff(self, master_branch="origin/master"):
         repo = GitChangesLog()
         github_api = GithubApi()
 
