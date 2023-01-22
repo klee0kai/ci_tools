@@ -9,7 +9,7 @@ class GithubApi:
     def __init__(self):
         self.repository = os.environ["GITHUB_REPOSITORY"]
         self.api_url = os.environ["GITHUB_API_URL"]
-        self.token = os.environ["GITHUB_API_TOKEN"]
+        self.token = os.environ["SECRETS_GH_API_TOKEN"]
         self.session = requests.Session()
         self.session.headers["Authorization"] = f"Bearer {self.token}"
         return
