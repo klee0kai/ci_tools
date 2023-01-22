@@ -1,0 +1,8 @@
+venv
+
+secrets.py
+
+
+.idea
+.idea/**
+**/*.iml
