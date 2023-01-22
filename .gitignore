@@ -6,3 +6,4 @@ secrets.py
 .idea
 .idea/**
 **/*.iml
+__pycache__
