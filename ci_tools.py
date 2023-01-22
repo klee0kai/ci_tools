@@ -1,16 +1,15 @@
 #!/bin/python3
 
 import argparse
-import os, sys
-import secrets
-from gh_ci.GithubConfigs import GithubConfigs
-from main import GithubCITools
+
+from gh_helpers.GithubConfigs import GithubConfigs
+from github_ci_tools import GithubCITools
 
 if __name__ == '__main__':
     configs = GithubConfigs()
     tools = GithubCITools()
 
-    parser = argparse.ArgumentParser(add_help=True, description="gh_ci_tools - Github CI (Actions) Tools")
+    parser = argparse.ArgumentParser(add_help=True, description="ci_tools - CI Tools")
     parser.add_argument("-f", type=str, default=None, help="Result to file")
     parser.add_argument("--summary", action='store_true', help="Same result as github report summary")
     parser.add_argument("-l", action='store_true', help="Log result to console")
@@ -21,7 +20,7 @@ if __name__ == '__main__':
         if m[:2] == "__":
             continue
         arguments = getattr(tools, m).__code__
-        parser_cmd = subparsers.add_parser(m)
+        parser_cmd = subparsers.add_parser(m, help="Github Action Tool")
         parser_cmd.set_defaults(func=getattr(tools, m))
         for arg in arguments.co_varnames[1:]:
             parser_cmd.add_argument(f"--{arg}", type=str)

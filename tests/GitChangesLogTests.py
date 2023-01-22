@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 
-from main import GithubCITools
+from github_ci_tools import GithubCITools
 
 
 class GitChangesLogTests(TestCase):
