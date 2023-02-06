@@ -3,35 +3,16 @@
 import argparse
 import logging
 
-
 from gh_helpers.GithubConfigs import GithubConfigs
-from github_ci_tools import GithubCITools
+from ci_tools import create_arg_parser
+
+configs = GithubConfigs()
 
 if __name__ == '__main__':
-    configs = GithubConfigs()
-    tools = GithubCITools()
-
-    parser = argparse.ArgumentParser(add_help=True, description="ci_tools - CI Tools")
-    parser.add_argument("-w", type=str, default=None, help="Result write to file")
-    parser.add_argument("--summary", action='store_true', help="Same result as github report summary")
-    parser.add_argument("-l", action='store_true', help="Log result to console")
-    parser.add_argument("-d", action='store_true', help="Debug log")
-
-    subparsers = parser.add_subparsers(help='sub-command help')
-
-    for m in list(tools.__dir__()):
-        if m[:2] == "__":
-            continue
-        arguments = getattr(tools, m).__code__
-        parser_cmd = subparsers.add_parser(m, help="Github Action Tool")
-        parser_cmd.set_defaults(func=getattr(tools, m))
-        for arg in arguments.co_varnames[1:]:
-            parser_cmd.add_argument(f"--{arg}", type=str)
-        pass
-
+    parser = create_arg_parser()
     args = parser.parse_args()
 
-    if args.d:
+    if 'd' in args and args.d:
         logging.basicConfig(level=logging.DEBUG)
 
     if not 'func' in args or args.func is None:

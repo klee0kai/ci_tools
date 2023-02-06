@@ -6,9 +6,6 @@ HASH_LEN = 40
 
 class GitChangesLog:
 
-    def __init__(self):
-        pass
-
     def log_bettween(self, branch1, branch2="HEAD"):
         result = subprocess.getoutput(f"git log --pretty=oneline {branch1}..{branch2}")
         log = []
