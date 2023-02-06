@@ -1,15 +1,12 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'CI Deploy Tools'
+description: 'Collection of ci/cd deploy tools'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  args:
+    description: 'Cmd and args'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    default: '-h'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.args }}
