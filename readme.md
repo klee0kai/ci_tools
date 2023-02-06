@@ -10,7 +10,7 @@ This is sample, how to collect release changes in github actions.
 
 `.github/workflows/collect_release_changes.yml`:
 ```yaml
-name: Collect Release Changes
+name: Simple Hello world Job
 
 on:
   workflow_dispatch:
