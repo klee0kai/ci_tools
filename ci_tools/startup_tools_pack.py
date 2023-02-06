@@ -15,6 +15,6 @@ class StartupToolsPack:
         :param who_to_greet: Whom we greet
         :return:
         """
-        markdown1 = f"# Hello {who_to_greet}\n"
-        markdown1 += "Welcome to CI deploy tools\n"
-        return markdown1
+        markdown = f"# Hello {who_to_greet}\n"
+        markdown += "Welcome to CI deploy tools\n"
+        return markdown

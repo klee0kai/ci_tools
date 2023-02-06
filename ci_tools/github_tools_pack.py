@@ -6,7 +6,7 @@ class GithubToolsPack:
     def __init__(self):
         pass
 
-    def release_diff(self, master_branch="origin/master"):
+    def gh_release_diff(self, master_branch="origin/master"):
         """
         Collect release change log from Github pull requests
         :param master_branch: master or main branch for collecting changes

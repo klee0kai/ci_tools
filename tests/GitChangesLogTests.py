@@ -10,6 +10,6 @@ class GitChangesLogTests(TestCase):
         os.chdir(f"{os.getcwd()}/tests/some_git_rep")
         print(f"cur path {os.getcwd()}")
         tools = GithubToolsPack()
-        md = tools.release_diff("0.0.1")
+        md = tools.gh_release_diff("0.0.1")
 
         print(md)
