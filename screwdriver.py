@@ -23,7 +23,7 @@ if __name__ == '__main__':
     cmd_optionals = dict(args._get_kwargs())
     options = dict()
     for arg in func.__code__.co_varnames[1:]:
-        if not cmd_optionals[arg] is None:
+        if arg in cmd_optionals and not cmd_optionals[arg] is None:
             options[arg] = cmd_optionals[arg]
     result = func(**options)
 
