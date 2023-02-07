@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: klee0kai/screwdriver@master
         with:
-          cmd: hello_world -l 
+          cmd: hello_world -l --summary
 ```
 
 ## Using Env
