@@ -18,14 +18,14 @@ def __structured_doc_from(doc_txt):
     return doc_desc, doc_dict
 
 
+def add_common_args(parser):
+    parser.add_argument("-w", type=str, default=None, help="Result write to file")
+    parser.add_argument("--summary", action='store_true', help="Same result as github report summary")
+    parser.add_argument("-l", action='store_true', help="Log result to console")
+    parser.add_argument("-d", action='store_true', help="Debug log")
 
 def create_arg_parser():
     arg_parser = argparse.ArgumentParser(add_help=True, description='Collection of ci/cd deploy tools')
-    arg_parser.add_argument("-f", type=str, default=None, help="Result to file")
-    arg_parser.add_argument("-w", type=str, default=None, help="Result write to file")
-    arg_parser.add_argument("--summary", action='store_true', help="Same result as github report summary")
-    arg_parser.add_argument("-l", action='store_true', help="Log result to console")
-    arg_parser.add_argument("-d", action='store_true', help="Debug log")
 
     subparsers = arg_parser.add_subparsers(help='sub-command help')
     for toolPack in [startupToolsPack, githubToolsPack]:
@@ -41,6 +41,7 @@ def create_arg_parser():
                 help=doc_desc if doc_desc is not None else "Github Action Tool",
             )
             parser_cmd.set_defaults(func=getattr(toolPack, m))
+            add_common_args(parser_cmd)
             for arg in code.co_varnames[1:code.co_argcount]:
                 parser_cmd.add_argument(f"--{arg}", type=str)
 
