@@ -2,6 +2,8 @@
 
 import argparse
 import logging
+import sys
+import shlex
 
 from gh_helpers.GithubConfigs import GithubConfigs
 from ci_tools import create_arg_parser
@@ -9,8 +11,10 @@ from ci_tools import create_arg_parser
 configs = GithubConfigs()
 
 if __name__ == '__main__':
+    sys_args = shlex.split(sys.argv[1]) if len(sys.argv[1:]) == 1 else sys.argv[1:]
+
     parser = create_arg_parser()
-    args = parser.parse_args()
+    args = parser.parse_args(sys_args)
 
     if 'd' in args and args.d:
         logging.basicConfig(level=logging.DEBUG)
