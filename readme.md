@@ -21,7 +21,7 @@ jobs:
     name: Collect Release Changes
     runs-on: ubuntu-latest
     steps:
-      - uses: klee0kai/ci_tools@master
+      - uses: klee0kai/screwdriver@master
         with:
           cmd: hello_world
 ```
