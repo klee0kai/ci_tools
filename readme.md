@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: klee0kai/ci_tools@master
         with:
-          arg: hello_world
+          cmd: hello_world
 ```
 
 ## Using Env
