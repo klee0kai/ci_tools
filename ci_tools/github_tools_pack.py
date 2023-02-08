@@ -1,41 +1,57 @@
 from api.GithubApi import GithubApi
 from helpers.GitChangesLog import GitChangesLog
+from result_poet.MarkdownPoet import MarkdownPoet, make_link
+from utils.Collections import remove_doubles
 
 
 class GithubToolsPack:
     def __init__(self):
         pass
 
-    def gh_release_diff(self, master_branch="origin/master"):
+    def gh_release_diff(self, master_branch="origin/master", head='HEAD'):
         """
         Collect release change log from Github pull requests
         :param master_branch: master or main branch for collecting changes
+        :param head: current branch
         :return:
         """
         repo = GitChangesLog()
         github_api = GithubApi()
 
-        commits = list(map(lambda l: l['hash'], repo.log_bettween(master_branch)))
+        commits = list(map(lambda l: l['hash'], repo.log_bettween(branch1=master_branch, branch2=head)))
         merges = repo.only_merges(commits)
         pulls = list(map(lambda c: github_api.commit_pulls(c), merges))
 
-        markdown = "# Changes List\n"
-        for commit_pulls in pulls:
-            for p in commit_pulls:
-                if 'merge_commit_sha' not in p or p['merge_commit_sha'] not in merges:
-                    continue
-                markdown += "\n\n\n"
-                markdown += f"## {p['title']}\n"
-                if not p['body'] is None:
-                    body = p['body']
-                    ## simplify headers
-                    body = body.replace("\n# ", "\n## ")
-                    markdown += f"{body}\n\n"
+        # filter only merged
+        pulls = list(map(
+            lambda p_list:
+            [
+                p for p in p_list
+                if 'merge_commit_sha' in p and p['merge_commit_sha'] in merges
+            ],
+            pulls
+        ))
+        # flat
+        pulls = list(map(lambda p: p[0], pulls))
+        pulls = remove_doubles(pulls, lambda x: x["id"])
 
-                markdown += f"### Links:\n"
-                markdown += f" - [Pull Request]({p['html_url']})\n\n"
-                if 'issue_url' in p:
-                    markdown += f" - [Issue Task]({p['issue_url']})\n\n"
-                pass
+        md = MarkdownPoet()
+        md.heading("Changes List")
+        for p in pulls:
+            md.heading(p['title'], level=2)
+            if not p['body'] is None:
+                body = p['body']
+                ## simplify headers
+                body = body.replace("\n# ", "\n## ")
+                md.text(body)
 
-        return markdown
+            assignee = p['assignee']
+            if assignee is not None:
+                link = make_link("@" + assignee["login"], assignee["html_url"])
+                md.text(f"Developed by {link}")
+
+            md.heading("Links", level=3)
+            md.bulleted_link("Pull Request", p['html_url'])
+            pass
+
+        return str(md)

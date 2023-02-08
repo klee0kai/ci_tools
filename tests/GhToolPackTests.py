@@ -6,13 +6,11 @@ from ci_tools.github_tools_pack import GithubToolsPack
 
 class GhToolPackTests(TestCase):
 
-    def test_cwd(self):
-        print(f"cur path {os.getcwd()}")
+    def test_release_changes(self):
+        tool = GithubToolsPack()
+        changes = tool.gh_release_diff(master_branch="0.0.11", head="0.0.12")
 
-    def test_log_parse(self):
-        os.chdir(f"{os.getcwd()}/tests/some_git_rep")
-        print(f"cur path {os.getcwd()}")
-        tools = GithubToolsPack()
-        md = tools.gh_release_diff("0.0.1")
+        print(changes)
 
-        print(md)
+        with(open("changes.md", "w")) as f:
+            f.write(changes)
