@@ -4,7 +4,7 @@ from unittest import TestCase
 from ci_tools.github_tools_pack import GithubToolsPack
 
 
-class GitChangesLogTests(TestCase):
+class GhToolPackTests(TestCase):
 
     def test_cwd(self):
         print(f"cur path {os.getcwd()}")
