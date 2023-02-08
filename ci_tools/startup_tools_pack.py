@@ -1,7 +1,3 @@
-from gh_helpers.GithubApi import GithubApi
-from git_helper.GitChangesLog import GitChangesLog
-
-
 class StartupToolsPack:
     def __init__(self):
         pass

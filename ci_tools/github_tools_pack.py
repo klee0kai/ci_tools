@@ -1,5 +1,5 @@
-from gh_helpers.GithubApi import GithubApi
-from git_helper.GitChangesLog import GitChangesLog
+from api.GithubApi import GithubApi
+from helpers.GitChangesLog import GitChangesLog
 
 
 class GithubToolsPack:
