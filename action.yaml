@@ -1,12 +1,31 @@
 name: 'CI Deploy Tools'
 description: 'Collection of ci/cd deploy tools'
 inputs:
+
+  gh_api_token:
+    description: 'Github API Token'
+    required: false
+    default: ''
+
   cmd:
     description: 'Cmd with args'
     required: true
     default: '-h'
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.cmd }}
+  using: "composite"
+  steps:
+    - name: set up Python 3
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install CI Tools Requirements
+      run: pip install -r ${{ github.action_path }}/requirements.txt
+      shell: bash
+
+    - name: Run Screwdriver.py
+      env:
+        SECRETS_GH_API_TOKEN: ${{ inputs.gh_api_token }}
+      run: python ${{ github.action_path }}/screwdriver.py ${{ inputs.cmd }}
+      shell: bash
