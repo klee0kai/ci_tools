@@ -32,6 +32,7 @@ class GithubToolsPack:
             pulls
         ))
         # flat
+        pulls = [p for p in pulls if len(p) > 0]
         pulls = list(map(lambda p: p[0], pulls))
         pulls = remove_doubles(pulls, lambda x: x["id"])
 
