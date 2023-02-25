@@ -8,6 +8,8 @@ import secrets
 ACTION_ENV_DELIMITER: str = "__ENV_DELIMITER__"
 COMMAND_MARKER: str = "::"
 
+CACHE_FILE = "request_cache"
+
 
 def _clean_markdown_string(markdown_string: str) -> str:
     """

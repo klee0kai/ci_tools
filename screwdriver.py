@@ -5,7 +5,7 @@ import logging
 import sys
 import shlex
 
-from gh_helpers.GithubConfigs import GithubConfigs
+from api.GithubConfigs import GithubConfigs
 from ci_tools import create_arg_parser
 
 configs = GithubConfigs()
