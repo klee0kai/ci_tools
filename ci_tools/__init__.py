@@ -1,10 +1,12 @@
 import argparse
 
+from ci_tools.encrypt_tools_pack import EncryptingToolsPack
 from ci_tools.github_tools_pack import GithubToolsPack
 from ci_tools.startup_tools_pack import StartupToolsPack
 
 startupToolsPack = StartupToolsPack()
 githubToolsPack = GithubToolsPack()
+encryptingToolsPack = EncryptingToolsPack()
 
 
 def __structured_doc_from(doc_txt):
@@ -28,7 +30,7 @@ def create_arg_parser():
     arg_parser = argparse.ArgumentParser(add_help=True, description='Collection of ci/cd deploy tools')
 
     subparsers = arg_parser.add_subparsers(help='sub-command help')
-    for toolPack in [startupToolsPack, githubToolsPack]:
+    for toolPack in [startupToolsPack, githubToolsPack, encryptingToolsPack]:
         for m in list(toolPack.__dir__()):
             if m[:2] == "__":
                 continue

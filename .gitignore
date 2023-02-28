@@ -2,8 +2,14 @@ venv
 
 secrets.py
 
+# builds
+build
+**build**/**
+*.egg-info/**
+*.egg-info
 
 .idea
 .idea/**
 **/*.iml
 __pycache__
+
