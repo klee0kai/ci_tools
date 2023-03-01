@@ -7,46 +7,44 @@ class EncryptingToolsPack:
     def __init__(self):
         pass
 
-    def encrypt(self, key, file_name=None, txt=None):
+    def encrypt_file(self, key, in_file, out_file):
         """
-        Encrypt message or file
+        Encrypt file by fernet
         :param key: symmetric key for encrypting and decrypting
-        :param file_name: input file for encrypt
-        :param txt: message for encrypt
+        :param in_file: input file
+        :param out_file: input file for encrypt
         :return:
         """
         fernet_key = base64.urlsafe_b64encode((key + '&' * 32)[:32].encode("utf-8"))
         fernet = Fernet(fernet_key)
 
         encrypted = None
-        if file_name is not None:
-            with open(file_name, 'rb') as file:
-                original = file.read()
-            encrypted = fernet.encrypt(original)
+        with open(in_file, 'rb') as file:
+            original = file.read()
+        encrypted = fernet.encrypt(original)
 
-        if txt is not None:
-            encrypted = fernet.encrypt(txt.encode("utf-8"))
+        with(open(out_file, "wb")) as f:
+            f.write(encrypted)
 
-        return encrypted.decode("utf-8")
+        return f"ecrypted {in_file} to {out_file}"
 
-    def decrypt(self, key, file_name=None, txt=None):
+    def decrypt_file(self, key, in_file, out_file):
         """
-        Decrypt message or file
+        Decrypt file by fernet
         :param key: symmetric key for encrypting and decrypting
-        :param file_name: input file for encrypt
-        :param txt: message for encrypt
+        :param in_file: input encrypted file
+        :param out_file: output encrypted file
         :return:
         """
         fernet_key = base64.urlsafe_b64encode((key + '&' * 32)[:32].encode("utf-8"))
         fernet = Fernet(fernet_key)
 
         decrypted = None
-        if file_name is not None:
-            with open(file_name, 'rb') as file:
-                original = file.read()
-            decrypted = fernet.decrypt(original)
+        with open(in_file, 'rb') as file:
+            original = file.read()
+        decrypted = fernet.decrypt(original)
 
-        if txt is not None:
-            decrypted = fernet.decrypt(txt)
+        with(open(out_file, "wb")) as f:
+            f.write(decrypted)
 
-        return decrypted.decode("utf-8")
+        return f"decrypted {in_file} to {out_file}"
