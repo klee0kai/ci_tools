@@ -1,7 +1,6 @@
 #!/bin/python3
-
+import os
 import shutil
-import os, sys
 
 HOME = os.environ.get("HOME")
 

@@ -1,7 +1,6 @@
-import os
 from unittest import TestCase
 
-from ci_tools.github_tools_pack import GithubToolsPack
+from screwdriver.ci_tools.github_tools_pack import GithubToolsPack
 
 
 class GhToolPackTests(TestCase):
