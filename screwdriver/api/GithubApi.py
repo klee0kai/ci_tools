@@ -1,18 +1,16 @@
 import json
-import os, sys
-import requests
-import secrets
+import os
 import requests_cache
 
-from api.GithubConfigs import CACHE_FILE
+from screwdriver.api.GithubConfigs import CACHE_FILE
 
 
 class GithubApi:
 
     def __init__(self):
-        self.repository = os.environ["GITHUB_REPOSITORY"]
-        self.api_url = os.environ["GITHUB_API_URL"]
-        self.token = os.environ["SECRETS_GH_API_TOKEN"]
+        self.repository = os.getenv("GITHUB_REPOSITORY", None)
+        self.api_url = os.getenv("GITHUB_API_URL", None)
+        self.token = os.getenv("SECRETS_GH_API_TOKEN", None)
         self.session = requests_cache.CachedSession(CACHE_FILE)
         self.session.headers["Authorization"] = f"Bearer {self.token}"
 

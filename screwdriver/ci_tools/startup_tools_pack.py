@@ -1,7 +1,7 @@
-from helpers.GitStatus import GitStatus
-from helpers.MachineInfo import MachineInfo
+from screwdriver.helpers.GitStatus import GitStatus
+from screwdriver.helpers.MachineInfo import MachineInfo
 
-from result_poet.MarkdownPoet import MarkdownPoet
+from screwdriver.result_poet.MarkdownPoet import MarkdownPoet
 
 
 class StartupToolsPack:

@@ -12,4 +12,5 @@ build
 .idea/**
 **/*.iml
 __pycache__
-
+dist
+dist/**

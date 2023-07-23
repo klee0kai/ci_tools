@@ -1,7 +1,7 @@
-from api.GithubApi import GithubApi
-from helpers.GitChangesLog import GitChangesLog
-from result_poet.MarkdownPoet import MarkdownPoet, make_link
-from utils.Collections import remove_doubles
+from screwdriver.api.GithubApi import GithubApi
+from screwdriver.helpers.GitChangesLog import GitChangesLog
+from screwdriver.result_poet.MarkdownPoet import MarkdownPoet, make_link
+from screwdriver.utils.Collections import remove_doubles
 
 
 class GithubToolsPack:

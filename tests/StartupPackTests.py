@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from ci_tools import StartupToolsPack
+from screwdriver.ci_tools import StartupToolsPack
 
 
 class StartupPackTests(TestCase):

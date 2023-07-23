@@ -1,8 +1,8 @@
 import argparse
 
-from ci_tools.encrypt_tools_pack import EncryptingToolsPack
-from ci_tools.github_tools_pack import GithubToolsPack
-from ci_tools.startup_tools_pack import StartupToolsPack
+from screwdriver.ci_tools.encrypt_tools_pack import EncryptingToolsPack
+from screwdriver.ci_tools.github_tools_pack import GithubToolsPack
+from screwdriver.ci_tools.startup_tools_pack import StartupToolsPack
 
 startupToolsPack = StartupToolsPack()
 githubToolsPack = GithubToolsPack()

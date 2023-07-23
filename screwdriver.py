@@ -1,13 +1,12 @@
-#!/bin/python3
+#!/usr/bin/env python
 
-import argparse
 import logging
 import os
 import sys
 import shlex
 
-from api.GithubConfigs import GithubConfigs
-from ci_tools import create_arg_parser
+from screwdriver.api.GithubConfigs import GithubConfigs
+from screwdriver.ci_tools import create_arg_parser
 
 configs = GithubConfigs()
 
